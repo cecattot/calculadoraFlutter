@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:math_expressions/math_expressions.dart';
+import 'calculadora.dart';
 
 void main() {
   runApp(const MyApp());
@@ -106,6 +106,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           onPressed: (){
                             setState(() {
                               userInput = userInput.substring(0, userInput.length - 1);
+
                             });
                           },
                           onLongPress: (){
@@ -142,7 +143,6 @@ class _MyHomePageState extends State<MyHomePage> {
                               botaoNumero(Colors.blueGrey, "2"),
                               botaoNumero(Colors.black12, "3"),
                               botaoNumero(Colors.green, "-"),
-
                             ],),
                           ),
                         ],),
@@ -202,13 +202,11 @@ class _MyHomePageState extends State<MyHomePage> {
                               setState(() {
                                 answer = calcula(userInput);
                               });
-                              print("ponto: $existePonto");
                               if(!userInput.contains(".")){
                                 existePonto = false;
                               } else {
                                 existePonto = true;
                               }
-                              print("ponto atual: $existePonto");
                             },
                             child: Text("=", style: new TextStyle(fontSize: 30),),
                           ),
@@ -247,71 +245,5 @@ class _MyHomePageState extends State<MyHomePage> {
         margin: new EdgeInsets.all(2.0),
       )
     );
-  }
-}
-
-String calcula(String valor)  {
-  Parser p = Parser();
-  Expression exp = p.parse(valor);
-  ContextModel cm = ContextModel();
-  double eval = exp.evaluate(EvaluationType.REAL, cm);
-  String resultado = eval.toString();
-  return resultado;
-}
-
-String inverte(String valor)  {
-  Parser p = Parser();
-  Expression exp = p.parse(valor);
-  ContextModel cm = ContextModel();
-  double eval = exp.evaluate(EvaluationType.REAL, cm);
-  eval = eval*(-1);
-  String resultado = eval.toString();
-  return resultado;
-}
-
-String validaConta(String valor, String novoValor)  {
-  if (valor.length>0) {
-    int index = valor.length - 1;
-    if(novoValor=="-"&&!valor.contains("-",index)&&!valor.contains(".",index)){
-      print("// insere o negativo");
-      return novoValor;
-    }
-    if(valor.contains("*",index)||valor.contains("/",index)||valor.contains("-",index)||valor.contains("+",index)||valor.contains(".",index))
-    {
-      if((novoValor!="*")&&(novoValor!="+")&&(novoValor!="-")&&(novoValor!="/")&&(novoValor!=".")){
-        print("// insere um digito3");
-        return novoValor;
-      }
-      print("// recusa operador duplicado ");
-      return "";
-    }else{
-      if(novoValor=="."){
-        print("valida a inserção de ponto");
-        return validaPonto();
-      } else {
-        print("insere valorA");
-        existePonto = false;
-        return novoValor;
-      }
-    }
-  } else {
-    if(novoValor=="*"||novoValor=="/"||novoValor=="-"||novoValor=="+"||novoValor=="."){
-      print("recusa operador no valor inicial");
-      return "";
-    } else {
-      print("insere digito1");
-      return novoValor;
-    }
-  }
-}
-
-bool existePonto = false;
-String validaPonto()  {
-  if(existePonto==true){
-    return "";
-  }
-  else{
-    existePonto = true;
-    return ".";
   }
 }
