@@ -105,13 +105,18 @@ class _MyHomePageState extends State<MyHomePage> {
                           style: TextButton.styleFrom(backgroundColor: Colors.pink),
                           onPressed: (){
                             setState(() {
+                              if("." == userInput.substring(userInput.length-1)){
+                                existePonto = false;
+                              }
                               userInput = userInput.substring(0, userInput.length - 1);
 
                             });
                           },
                           onLongPress: (){
                             setState(() {
+                              existePonto = false;
                               userInput = "";
+                              answer = "";
                             });
                           },
                           child: Text("←", style: new TextStyle(fontSize: 30),),

@@ -41,6 +41,7 @@ String validaConta(String valor, String novoValor) {
         !valor.contains("-", index) &&
         !valor.contains(".", index)) {
       print("first");
+      existePonto = false;
       return novoValor;
     }
     if (valor.contains("*", index) ||
@@ -99,9 +100,11 @@ bool existePonto = false;
 
 String validaPonto() {
   if (existePonto == true) {
+    print('ponto existente');
     return "";
   } else {
     existePonto = true;
+    print('ponto criado');
     return ".";
   }
 }
