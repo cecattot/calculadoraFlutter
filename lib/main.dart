@@ -153,19 +153,16 @@ class _MyHomePageState extends State<MyHomePage> {
                         ],),
                       ),
                       Expanded(
-                        child: Container(child: ElevatedButton(
-                          style: TextButton.styleFrom(backgroundColor: Colors.black38),
-                          onPressed: (){
-                            setState(() {
-                              userInput += answer;
-                            });
-                          },
-                          child: Text("+=", style: new TextStyle(fontSize: 30),),
-                        ),
-                          width: MediaQuery.of(context).size.width,
-                          height: MediaQuery.of(context).size.height,
-                          margin: new EdgeInsets.all(2.0),
-                        ),
+                          child: Container(child: ElevatedButton(
+                            style: TextButton.styleFrom(backgroundColor: Colors.black38),
+                            onPressed: (){
+                            },
+                            child: Text("", style: new TextStyle(fontSize: 30),),
+                          ),
+                            width: MediaQuery.of(context).size.width,
+                            height: MediaQuery.of(context).size.height,
+                            margin: new EdgeInsets.all(2.0),
+                          )
                       ),
                     ],),
                   ),
